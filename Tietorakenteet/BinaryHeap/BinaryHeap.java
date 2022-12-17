@@ -1,7 +1,5 @@
 package BinaryHeap;
 
-import java.util.Arrays;
-
 public class BinaryHeap {
 
     // Member variables of this class
@@ -105,22 +103,30 @@ public class BinaryHeap {
             swap(current, parent(current));
             current = parent(current);
         }
-        
+        print();
     }
 
     // Method 8
     // To print the contents of the heap
     public void print() {
-        for (int i = 1; i <= size / 2; i++) {
+        if (size > 2) {
+            for (int i = 1; i <= size / 2; i++) {
 
-            // Printing the parent and both childrens
-            System.out.print(
-                    "PARENT : " + Heap[i]
-                            + "\nLEFT CHILD : " + Heap[2 * i]
-                            + "\nRIGHT CHILD : " + Heap[2 * i + 1] + "\n");
+                // Printing the parent and both childrens
+                System.out.print(
+                        "\nPARENT : " + Heap[i]
+                                + "\nLEFT CHILD : " + Heap[2 * i]
+                                + "\nRIGHT CHILD : " + Heap[2 * i + 1] + "\n");
 
-            // By here new line is required
-            System.out.println();
+                // By here new line is required
+                System.out.println();
+            }
+        }
+        if (size / 2 < 1 && size < 3) {
+            System.out.println("PARENT: " + Heap[1]);
+        }
+        if (size / 2 == 1 && size < 3) {
+            System.out.println("PARENT: " + Heap[1] + "\n LEFT CHILD: " + Heap[2]);
         }
     }
 
@@ -136,9 +142,10 @@ public class BinaryHeap {
         return popped;
     }
 
-    public int[] getHeap(){
+    public int[] getHeap() {
         return Heap;
     }
+
     // Method 10
     // Main driver method
     public static void main(String[] arg) {
@@ -149,32 +156,30 @@ public class BinaryHeap {
         // Creating object opf class in main() methodn
         BinaryHeap minHeap = new BinaryHeap(11);
 
-        // Inserting element to minHeap
-        // using insert() method
+        char select;
+        do {
 
-        // Custom input entries
-        minHeap.insert(3);
-        minHeap.insert(5);
-        minHeap.insert(17);
-        minHeap.insert(10);
-        minHeap.insert(84);
-        minHeap.insert(19);
-        minHeap.insert(6);
-        minHeap.insert(22);
-        minHeap.insert(9);
-        minHeap.insert(65);
-        minHeap.insert(23);
-        
-
-        Arrays.sort(minHeap.getHeap());
-
-        // Print all elements of the heap
-        minHeap.print();
-
-        // Removing minimum value from above heap
-        // and printing it
-        System.out.println("The Min val is "
-                + minHeap.remove());
+            System.out.println("\n\t\t\t1. Lisää avain.");
+            System.out.println("\t\t\t2. Poista min Arvo.");
+            System.out.println("\t\t\t3. Tulosta lista");
+            System.out.println("\t\t\t4. Lopetus");
+            System.out.print("\n\n"); // tehdään tyhjiä rivejä
+            select = Lue.merkki();
+            switch (select) {
+                case '1':
+                    System.out.println("Anna uusi avain (numero)");
+                    int data = Lue.kluku();
+                    minHeap.insert(data);
+                    break;
+                case '2':
+                    System.out.println("Min arvo poistettu: " + minHeap.remove());
+                    break;
+                case '3':
+                    minHeap.print();
+                    break;
+                case '4':
+                    break;
+            }
+        } while (select != '4');
     }
-
 }

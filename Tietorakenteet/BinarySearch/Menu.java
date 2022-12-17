@@ -1,5 +1,7 @@
 package BinarySearch;
 
+import java.util.Arrays;
+
 public class Menu {
     public static void main(String[] args) {
         BinarySearch search = new BinarySearch();
@@ -21,7 +23,7 @@ public class Menu {
                 case '2':
                     System.out.println("Anna etsittävä avain (numero)");
                     data = Lue.kluku();
-                    if (search.Search(search.getList(), data, 0, search.getList().length) > 0) {
+                    if (search.Search(search.getList(), data, 0, search.getList().length) > -1) {
                         System.out.println("Avain löytyi.");
                     } else
                         System.out.println("Avainta ei löytynyt.");
@@ -29,9 +31,10 @@ public class Menu {
                     break;
                 case '3':
                     int[] list = search.getList();
+                    System.out.println("");
+                    Arrays.sort(list);
                     for (int i : list) {
-                        if(i != 0)
-                        System.out.println(i);
+                        System.out.println(i +",");
                     }
                     break;
                 case '4':
